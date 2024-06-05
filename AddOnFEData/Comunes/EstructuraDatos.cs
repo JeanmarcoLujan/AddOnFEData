@@ -31,11 +31,11 @@ namespace AddOnFEData.Comunes
                 if (ValidaVersion(m_sNombreAddon, m_sDescripcionUDTAddon, m_sVersion))
                 {
                     RegistrarVersion(m_sNombreAddon, m_sVersion);
-                    CrearUDTAddOn();
+                    //CrearUDTAddOn();
                     CrearUDFAddOn();
-                    CrearUDOAddOn();
-                    PrecargarDatosAddOn();
-                    CrearAutorizacionesAddOn();
+                    //CrearUDOAddOn();
+                    //PrecargarDatosAddOn();
+                    //CrearAutorizacionesAddOn();
                     // GenerateDataStructureReports();
                 }
             }
@@ -155,20 +155,9 @@ namespace AddOnFEData.Comunes
         {
             try
             {
-                CreaTablaMD("MSS_TIPOCUENTA", "Tipo de Cuenta", SAPbobsCOM.BoUTBTableType.bott_NoObject);
-                CreaTablaMD("MSS_TIPOSN", "Tipo de SN", SAPbobsCOM.BoUTBTableType.bott_NoObject);
-                CreaTablaMD("MSS_BANCOVALIDO", "Formato Banco TXT", SAPbobsCOM.BoUTBTableType.bott_NoObject);
-                CreaTablaMD("MSS_PREGUARDADO_CAB", "Pre-Guardado CAB", SAPbobsCOM.BoUTBTableType.bott_Document);
-                CreaTablaMD("MSS_PREGUARDADO_LIN", "Pre-Guardado LIN", SAPbobsCOM.BoUTBTableType.bott_DocumentLines);
-
-                CreaTablaMD("MSSL_PSE", "Configuración CR", SAPbobsCOM.BoUTBTableType.bott_MasterData);
-                CreaTablaMD("MSSL_PCE", "Certificados Ret", SAPbobsCOM.BoUTBTableType.bott_NoObject);
-
-                CreaTablaMD("MSSL_EPM", "Configuracion email", SAPbobsCOM.BoUTBTableType.bott_NoObject);
-                //Tabla de configuracion del addon de pagos masivos.
-                CreaTablaMD("MSSL_PMD", "PARAM. GENERALES PMD", SAPbobsCOM.BoUTBTableType.bott_MasterData);
-                //Pagar asinetos
-                CreaTablaMD("MSSL_TPM", "Tipos de pagos prov", SAPbobsCOM.BoUTBTableType.bott_NoObject);
+                //CreaTablaMD("MSS_BANCOVALIDO", "Formato Banco TXT", SAPbobsCOM.BoUTBTableType.bott_NoObject);
+                //CreaTablaMD("MSS_PREGUARDADO_CAB", "Pre-Guardado CAB", SAPbobsCOM.BoUTBTableType.bott_Document);
+                //CreaTablaMD("MSS_PREGUARDADO_LIN", "Pre-Guardado LIN", SAPbobsCOM.BoUTBTableType.bott_DocumentLines);
             }
             catch (Exception ex)
             {
@@ -183,143 +172,28 @@ namespace AddOnFEData.Comunes
         {
             try
             {
-                // UDF - DETALLES EN TABLA DE LA SOCIEDAD - OADM
-                CreaCampoMD("OADM", "MSS_TipoS", "Tipo Sociedad", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, "MSS_TIPOSN");
-                CreaCampoMD("OADM", "MSS_MTOEMB", "Monto de Embargo", SAPbobsCOM.BoFieldTypes.db_Float, SAPbobsCOM.BoFldSubTypes.st_Sum, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, "");
 
-                // UDF - DETALLES EN TABLA DE SOCIO DE NEGOCIO - ORCB
-                CreaCampoMD("OCRB", "MSS_CCI", "Cod Cta Interbancaria", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 30, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OCRB", "MSS_CtaDet", "Cta para Detraccion", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 2, SAPbobsCOM.BoYesNoEnum.tNO, new string[] { "SI", "NO" }, new string[] { "SI", "NO" }, "NO", null);
-                CreaCampoMD("OCRB", "MSS_Moneda", "Moneda", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OCRB", "MSS_TipoC", "Tipo Cuenta", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, "MSS_TIPOCUENTA");
 
-                // UDF - DETALLES EN TABLA DE SOCIO DE NEGOCIO - ORCD
-                CreaCampoMD("OCRD", "MSS_PAFC", "Flujo de Caja", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 200, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, "");
-
-                // UDF - DETALLES EN TABLA DE PAGOS EFECTUADOS - OVPM
-                CreaCampoMD("OVPM", "MSS_TipoP", "Tipo de Pago", SAPbobsCOM.BoFieldTypes.db_Numeric, SAPbobsCOM.BoFldSubTypes.st_None, 3, SAPbobsCOM.BoYesNoEnum.tNO, new string[] { "0", "1", "4", "5" }, new string[] { "Proveedores", "Detracciones", "Autodetracciones", "Pre-selección" }, null, null);
-                CreaCampoMD("OVPM", "MSS_MetP", "Metodo de Pago", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 15, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OVPM", "MSS_DesP", "Descripción del Pago", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 50, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OVPM", "MSS_FormaP", "Forma de Pago", SAPbobsCOM.BoFieldTypes.db_Numeric, SAPbobsCOM.BoFldSubTypes.st_None, 3, SAPbobsCOM.BoYesNoEnum.tNO, new string[] { "0", "1" }, new string[] { "Transferencia", "Cheque de gerencia" }, null, null);
-                CreaCampoMD("OVPM", "MSS_NroChk", "Nro de Cheque", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 15, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OVPM", "MSS_CuentaO", "Cuenta Origen", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 25, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OVPM", "MSS_CuentaD", "Cuenta Destino", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 25, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OVPM", "MSS_PT", "Periodo Tributario", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 6, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OVPM", "MSS_Lot", "Nro de Lote", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 6, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OVPM", "MSS_NO", "Nro Operacion", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 6, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OVPM", "MSS_OPDet", "Nro Operacion Detalle", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OVPM", "MSS_EM", "Enviado Mailing", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 2, SAPbobsCOM.BoYesNoEnum.tNO, new string[] { "SI", "NO" }, new string[] { "SI", "NO" }, null, null);
-                CreaCampoMD("OVPM", "MSS_PR", "Programado envio", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 2, SAPbobsCOM.BoYesNoEnum.tNO, new string[] { "SI", "NO" }, new string[] { "SI", "NO" }, null, null);
-                CreaCampoMD("OVPM", "MSS_StatusP", "Estatus Pago", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 3, SAPbobsCOM.BoYesNoEnum.tYES, new string[] { "0", "1", "2", "3", "4" }, new string[] { "NA", "Generado", "En Proceso", "Terminado", "Cancelado" }, "0", null);
-                CreaCampoMD("OVPM", "MSS_PP", "Nro ref pagos prov", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 15, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-
-                // UDF - DETALLES EN TABLA DE MEDIOS DE PAGOS - OPYM
-                CreaCampoMD("OPYM", "MSS_Formato", "Formato TXT", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, "MSS_BANCOVALIDO");
-
-                // UDF - DETALLES EN TABLA DE BANCOS - DSC1
-                CreaCampoMD("DSC1", "MSS_TipoC", "Tipo Cuenta", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, "MSS_TIPOCUENTA");
-
-                // UDF - DETALLES EN TABLA DE DOCUMENTOS DE MARKETING - OINV
-                CreaCampoMD("OINV", "MSS_PAGOLIQ", "Pago Liquidaciones", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 30, SAPbobsCOM.BoYesNoEnum.tNO, null, null, "", "");
-                CreaCampoMD("OINV", "MSS_TOPS", "Tipo de Oper. Sub. al Sistema", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO,
-                    new string[] { "01", "02", "03", "04", "05" }, new string[] { "Venta de bienes, prestacion de servicios o contratos de construccion gravados con el IGV",
-                        "Retiro de bienes gravados con el IGV", "Translados de bienes", "Venta de bienes gravados con el IGV realizada através de la bolsa de productos", "Venta de bienes exonerada del IGV" }, null, null);
-                CreaCampoMD("OINV", "MSS_ASAUTO", "Asiento Autodetracción", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, "", "");
-                CreaCampoMD("OINV", "MSS_TXTAUTO", "TXT Autodetracción Generado", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO,
-                    new string[] { "SI", "NO" }, new string[] { "SI", "NO" }, "NO", "");
-
-                // UDF - DETALLES EN TABLA DE DOCUMENTO DE ASIENTOS - OJDT
-                CreaCampoMD("OJDT", "MSS_Lot", "Nro de Lote", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 6, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OJDT", "MSS_NO", "Nro Operacion", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 6, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OJDT", "MSS_DocEntry", "DocEntry Factura", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 25, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OJDT", "MSS_CuentaO", "Cuenta Origen", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 25, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OJDT", "MSS_CuentaD", "Cuenta Destino", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 25, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OJDT", "MSS_PT", "Periodo Tributario", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 6, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OJDT", "MSS_CardCode", "Código SN", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 15, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OJDT", "MSS_MetP", "Metodo de Pago", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 15, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OJDT", "MSS_StatusP", "Estatus Pago", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 3, SAPbobsCOM.BoYesNoEnum.tYES, new string[] { "0", "1", "2", "3", "4" }, new string[] { "NA", "Generado", "En Proceso", "Terminado", "Cancelado" }, "0", null);
-                CreaCampoMD("OJDT", "MSS_FormaP", "Forma de Pago", SAPbobsCOM.BoFieldTypes.db_Numeric, SAPbobsCOM.BoFldSubTypes.st_None, 3, SAPbobsCOM.BoYesNoEnum.tNO, new string[] { "0", "1" }, new string[] { "Transferencia", "Cheque" }, null, null);
-                CreaCampoMD("OJDT", "MSS_NroChk", "Nro de Cheque", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 15, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OJDT", "MSS_PR", "Programado envio", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 2, SAPbobsCOM.BoYesNoEnum.tNO, new string[] { "SI", "NO" }, new string[] { "SI", "NO" }, null, null);
-                CreaCampoMD("OJDT", "MSS_TD", "Tipo de Documento", SAPbobsCOM.BoFieldTypes.db_Numeric, SAPbobsCOM.BoFldSubTypes.st_None, 4, SAPbobsCOM.BoYesNoEnum.tNO, new string[] { "18", "19", "204" }, new string[] { "Factura Proveedores", "Nota Credito Proveedores", "Factura Anticipo Proveedores" }, null, null);
-                CreaCampoMD("OJDT", "MSS_ND", "Nro Documento", SAPbobsCOM.BoFieldTypes.db_Numeric, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OJDT", "MSS_OPDet", "Nro Operacion Detalle", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OJDT", "MSS_PAGOLIQ", "Pago Liquidaciones", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 30, SAPbobsCOM.BoYesNoEnum.tNO, null, null, "", "");
-
-                // UDF - DETALLES EN TABLA DE CABECERA PREGUARDADO DOCUMENTOS - @MSS_PREGUARDADO_CAB
                 string[] ValidValues = null;
                 string[] ValidDescrip = null;
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_FechaPreG", "Fecha Pre-Guardado", SAPbobsCOM.BoFieldTypes.db_Date, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_FechaCont", "Fecha Contabilización", SAPbobsCOM.BoFieldTypes.db_Date, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_TipoCamb", "Tipo de Cambio", SAPbobsCOM.BoFieldTypes.db_Float, SAPbobsCOM.BoFldSubTypes.st_Rate, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                ValidValues = new string[3] { "0", "1", "4" };
-                ValidDescrip = new string[3] { "Proveedores", "Detracciones", "Autodetracciones" };
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_TipoPago", "Tipo de Pago", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 2, SAPbobsCOM.BoYesNoEnum.tYES, ValidValues, ValidDescrip, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_MetodoPago", "Metodo de Pago", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 15, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_SND", "SN Desde", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 15, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_SNH", "SN Hasta", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 15, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_Chk1", "Chk1", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_Chk2", "Chk2", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_Chk3", "Chk3", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_Chk4", "Chk4", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_Chk5", "Chk5", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                ValidValues = new string[4] { "G", "P", "A", "C" };
-                ValidDescrip = new string[4] { "Guardado", "Procesado", "Actualizado", "Cancelado" };
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_Estatus", "Estatus", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 1, SAPbobsCOM.BoYesNoEnum.tYES, ValidValues, ValidDescrip, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_DesP", "Desc pago", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 50, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_CAB", "MSS_Proy", "Proyecto", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 20, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
 
-                // UDF - DETALLES EN TABLA DE LINEAS PREGUARDADO DOCUMENTOS - @MSS_PREGUARDADO_LIN
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_CardCode", "Código SN", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 15, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_CardName", "Nombre SN", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 100, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_NroDocum", "Nro Documento", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 32, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_Moneda", "Moneda", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 5, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_TotalPago", "Total a Pagar", SAPbobsCOM.BoFieldTypes.db_Float, SAPbobsCOM.BoFldSubTypes.st_Price, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_DocEntry", "DocEntry", SAPbobsCOM.BoFieldTypes.db_Numeric, SAPbobsCOM.BoFldSubTypes.st_None, 11, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_ObjType", "ObjType", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_DocNum", "DocNum", SAPbobsCOM.BoFieldTypes.db_Numeric, SAPbobsCOM.BoFldSubTypes.st_None, 11, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_SerCor", "SerCor", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 20, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_DocDate", "DocDate", SAPbobsCOM.BoFieldTypes.db_Date, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_DocCur", "DocCur", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_SysRate", "SysRate", SAPbobsCOM.BoFieldTypes.db_Float, SAPbobsCOM.BoFldSubTypes.st_Rate, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_TotalDoc", "Total Doc", SAPbobsCOM.BoFieldTypes.db_Float, SAPbobsCOM.BoFldSubTypes.st_Price, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_Ret", "Retención", SAPbobsCOM.BoFieldTypes.db_Float, SAPbobsCOM.BoFldSubTypes.st_Price, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_SaldoVen", "Saldo Vencido", SAPbobsCOM.BoFieldTypes.db_Float, SAPbobsCOM.BoFldSubTypes.st_Price, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_PagoTotal", "Pago Total Doc", SAPbobsCOM.BoFieldTypes.db_Float, SAPbobsCOM.BoFldSubTypes.st_Price, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_FTransf", "Fecha Transf. Det.", SAPbobsCOM.BoFieldTypes.db_Date, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_Ref", "Referencia Det.", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 32, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSS_PagoRt", "Pago Total Calc", SAPbobsCOM.BoFieldTypes.db_Float, SAPbobsCOM.BoFldSubTypes.st_Price, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSS_PREGUARDADO_LIN", "MSSL_FLJ", "Partida flujo efectivo", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, "", "");
-                //U_MSS_PagoTRet
-                // UDF - @MSSL_PSE - Configuracion de certificados retencion
+                ValidValues = new string[6] { "DP", "DE", "DS", "DR", "DA", "DI" };
+                ValidDescrip = new string[6] { "Documento pendiente", "Documento con error", "Documento en seguimiento", "Documento rechazado", "Documento aprobado", "Documento interno" };
 
-                CreaCampoMD("@MSSL_PSE", "MSSL_PSE", "Serie inicial", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 24, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSSL_PSE", "MSSL_PCO", "Correlativo inicial", SAPbobsCOM.BoFieldTypes.db_Numeric, SAPbobsCOM.BoFldSubTypes.st_None, 11, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSSL_PSE", "MSSL_PSG", "Correlativo siguiente", SAPbobsCOM.BoFieldTypes.db_Numeric, SAPbobsCOM.BoFldSubTypes.st_None, 11, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSSL_PSE", "MSSL_PAC", "Esta activo?", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 1, SAPbobsCOM.BoYesNoEnum.tYES, new string[] { "Y", "N" }, new string[] { "SI", "NO" }, "N", null);
+                CreaCampoMD("OINV", "MGS_FE_Estado1", "MGS - FE Estado1", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 4, SAPbobsCOM.BoYesNoEnum.tNO, ValidValues, ValidDescrip, null, "");
+                CreaCampoMD("OINV", "MGS_FE_RespEnvio1", "MGS - FE Respuesta Envío1", SAPbobsCOM.BoFieldTypes.db_Memo, SAPbobsCOM.BoFldSubTypes.st_None, 250, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_EstatusDGII1", "MGS - FE Estado DGII1", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 30, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_MensajeDGII1", "MGS - FE Mensaje DGII1", SAPbobsCOM.BoFieldTypes.db_Memo, SAPbobsCOM.BoFldSubTypes.st_None, 250, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_PDF1", "MGS - FE - PDF1", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_Link, 150, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_PDF1", "MGS - FE - PDF21", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_Link, 150, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_QR1", "MGS - FE - QR1", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_Link, 150, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_FechaFirma1", "MGS - FE Fecha Firma1", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 20, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_CodigoSeguridad1", "MGS - FE Cod. Seguridad1", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 30, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_Ref1", "MGS - FE - Numero ref1", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 25, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_RefNCF1", "MGS - FE - NCF ref1", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 25, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_RefFecha1", "MGS - FE - Fecha ref1", SAPbobsCOM.BoFieldTypes.db_Date, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
 
-                // UDF - @MSSL_PCE - Certificados de retención
-                CreaCampoMD("@MSSL_PCE", "MSSL_PSR", "Serie asignada", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 24, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSSL_PCE", "MSSL_PCR", "Correlativo asignado", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 24, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSSL_PCE", "MSSL_PDA", "Fecha de pago", SAPbobsCOM.BoFieldTypes.db_Date, SAPbobsCOM.BoFldSubTypes.st_None, 10, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSSL_PCE", "MSSL_PSN", "Socio de negocio", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 20, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSSL_PCE", "MSSL_PDO", "Documento de pago", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 20, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSSL_PCE", "MSSL_PNL", "Esta anulado?", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 1, SAPbobsCOM.BoYesNoEnum.tYES, new string[] { "Y", "N" }, new string[] { "SI", "NO" }, "N", null);
 
-                //UDF - @MSSL_EPM - Configuracion email PMD
-                CreaCampoMD("@MSSL_EPM", "MSSL_PEN", "Nombre usuario", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 100, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSSL_EPM", "MSSL_PEE", "Email origen", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 60, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSSL_EPM", "MSSL_PEP", "Email Contra", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 60, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSSL_EPM", "MSSL_PEH", "Email host", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 60, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-                CreaCampoMD("@MSSL_EPM", "MSSL_PER", "Email port", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 20, SAPbobsCOM.BoYesNoEnum.tYES, null, null, null, "");
-
-                //UDF - @MSSL_PMD - Configuracion del addon de pagos masivos.
-                CreaCampoMD("@MSSL_PMD", "MSSL_CAD", "Analisis de detracción", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 1, SAPbobsCOM.BoYesNoEnum.tYES, new string[] { "Y", "N" }, new string[] { "SI", "NO" }, "N", null);
-                CreaCampoMD("@MSSL_PMD", "MSSL_CPP", "Comprobar saldo proveedores", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 1, SAPbobsCOM.BoYesNoEnum.tYES, new string[] { "Y", "N" }, new string[] { "SI", "NO" }, "N", null);
-                CreaCampoMD("@MSSL_PMD", "MSSL_CPD", "Comprobar saldo detracciones", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 1, SAPbobsCOM.BoYesNoEnum.tYES, new string[] { "Y", "N" }, new string[] { "SI", "NO" }, "N", null);
-                CreaCampoMD("@MSSL_PMD", "MSSL_CPA", "Comprobar saldo autodetracciones", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 1, SAPbobsCOM.BoYesNoEnum.tYES, new string[] { "Y", "N" }, new string[] { "SI", "NO" }, "N", null);
-
-                CreaCampoMD("OJDT", "MSSL_PCD", "Tipo pago proveedor", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 15, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, "MSSL_TPM");
             }
             catch (Exception ex)
             {
@@ -362,28 +236,7 @@ namespace AddOnFEData.Comunes
                     null
                     );
 
-            
 
-
-                CreaUDOMD(
-                    "MSSL_PMD",
-                    "Configuracion PMD",
-                    "MSSL_PMD",
-                    null,
-                    null,
-                    SAPbobsCOM.BoYesNoEnum.tNO,
-                    SAPbobsCOM.BoYesNoEnum.tNO,
-                    SAPbobsCOM.BoYesNoEnum.tNO,
-                    SAPbobsCOM.BoYesNoEnum.tNO,
-                    null,
-                    SAPbobsCOM.BoYesNoEnum.tNO,
-                    SAPbobsCOM.BoYesNoEnum.tYES,
-                    SAPbobsCOM.BoUDOObjType.boud_MasterData,
-                    SAPbobsCOM.BoYesNoEnum.tNO,
-                    SAPbobsCOM.BoYesNoEnum.tNO,
-                    SAPbobsCOM.BoYesNoEnum.tNO,
-                    null,
-                    null);
             }
             catch (Exception ex)
             {
