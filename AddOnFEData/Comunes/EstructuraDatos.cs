@@ -184,9 +184,9 @@ namespace AddOnFEData.Comunes
                 CreaCampoMD("OINV", "MGS_FE_RespEnvio", "MGS - FE Respuesta Envío", SAPbobsCOM.BoFieldTypes.db_Memo, SAPbobsCOM.BoFldSubTypes.st_None, 250, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
                 CreaCampoMD("OINV", "MGS_FE_EstatusDGII", "MGS - FE Estado DGII", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 30, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
                 CreaCampoMD("OINV", "MGS_FE_MensajeDGII", "MGS - FE Mensaje DGII", SAPbobsCOM.BoFieldTypes.db_Memo, SAPbobsCOM.BoFldSubTypes.st_None, 250, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OINV", "MGS_FE_PDF", "MGS - FE - PDF", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_Link, 150, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OINV", "MGS_FE_PDF", "MGS - FE - PDF2", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_Link, 150, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
-                CreaCampoMD("OINV", "MGS_FE_QR", "MGS - FE - QR", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_Link, 150, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_PDF", "MGS - FE - PDF", SAPbobsCOM.BoFieldTypes.db_Memo, SAPbobsCOM.BoFldSubTypes.st_Link, 150, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_PDF2", "MGS - FE - PDF2", SAPbobsCOM.BoFieldTypes.db_Memo, SAPbobsCOM.BoFldSubTypes.st_Link, 150, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
+                CreaCampoMD("OINV", "MGS_FE_QR", "MGS - FE - QR", SAPbobsCOM.BoFieldTypes.db_Memo, SAPbobsCOM.BoFldSubTypes.st_Link, 150, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
                 CreaCampoMD("OINV", "MGS_FE_FechaFirma", "MGS - FE Fecha Firma", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 20, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
                 CreaCampoMD("OINV", "MGS_FE_CodigoSeguridad", "MGS - FE Cod. Seguridad", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 30, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
                 CreaCampoMD("OINV", "MGS_FE_Ref", "MGS - FE - Numero ref", SAPbobsCOM.BoFieldTypes.db_Alpha, SAPbobsCOM.BoFldSubTypes.st_None, 25, SAPbobsCOM.BoYesNoEnum.tNO, null, null, null, null);
